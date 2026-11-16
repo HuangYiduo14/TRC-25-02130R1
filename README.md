@@ -31,4 +31,4 @@ Each script reads only its own `raw_data/` and writes `figure.pdf` and `figure.p
 
 ## Reproduce the computational workflow
 
-Open `reproducibility_code/README.md` and run its commands from inside `reproducibility_code/`. It provides the original environment, input placement, explicit run IDs/configurations and staged commands. Its references to a separate figure package now refer to the sibling `../figures/` folder. The original README is preserved byte-for-byte.
+Open `reproducibility_code/README.md` and run its commands from inside `reproducibility_code/`. It provides the original environment, input placement, explicit run IDs/configurations and staged commands.
