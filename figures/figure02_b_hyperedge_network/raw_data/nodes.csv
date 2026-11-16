@@ -1,0 +1,8 @@
+node_id,x,y,label,role,label_dx,label_dy,label_ha
+b0,0.4,6.5,b0,backbone,0,11,center
+p1,2.0,6.5,p1,portal,0,11,center
+p2,8.0,6.5,p2,portal,0,11,center
+b3,9.6,6.5,b3,backbone,0,11,center
+p3,8.0,1.8,p3,portal,14,-7,left
+O,3.0,0.9,O,centroid_origin,-13,-4,right
+D,6.5,0.9,D,centroid_destination,13,-4,left

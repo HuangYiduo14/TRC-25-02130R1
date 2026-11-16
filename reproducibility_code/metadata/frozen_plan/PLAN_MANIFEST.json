@@ -1,0 +1,161 @@
+{
+  "schema": "repro.frozen_split_consolidation_plan.v1",
+  "policy": "Topology metadata only; no old physical flows, fit coefficients or trained models. Fresh inputs, assignment, E/V charges and runtime coefficients must be regenerated.",
+  "source_candidate": "geo_gc_1000m",
+  "source_phase2_suite": "phase2_suite_03_r1",
+  "conceptual_regional_pair_count": 888787,
+  "frozen_backbone_coordinate_count": 87582,
+  "graph_node_count": 346373,
+  "graph_arc_count": 661644,
+  "source_graph_identity": "15a6fc40f38992504d74e14079a5d5e3aa2b7812faa16c33b859ed053bd7c31c",
+  "represented_i95_count": 869,
+  "tables": [
+    {
+      "name": "backbone_plan.parquet",
+      "source": "C:\\Users\\yiduo2\\PycharmProjects\\doe_solver_v3_phase1_outputs\\phase_05\\campaign_v1_0905\\run_001\\suites\\s03\\runtime_links.parquet",
+      "columns": [
+        "link_id",
+        "tail_node_id",
+        "head_node_id",
+        "role",
+        "runtime_class",
+        "primitive_id",
+        "member_arc_id",
+        "member_arc_idx"
+      ],
+      "source_sha256": "9e6d141dcb145f5287a054f5f335bd5c9ced195dbc713fb61a497f27dde3b797",
+      "rows": 87582
+    },
+    {
+      "name": "retained_nodes.parquet",
+      "source": "C:\\Users\\yiduo2\\PycharmProjects\\doe_solver_v3_phase1_outputs\\phase_05\\campaign_v1_0905\\run_001\\suites\\s03\\retained_nodes.parquet",
+      "columns": [
+        "node_id",
+        "node_type",
+        "longitude",
+        "latitude"
+      ],
+      "source_sha256": "24a13b0a535f754be5994c08517043a867940cb827dd6a5e8ac6e5beced89ce6",
+      "rows": 72724
+    },
+    {
+      "name": "physical_ownership.parquet",
+      "source": "C:\\Users\\yiduo2\\PycharmProjects\\doe_solver_v3_phase1_outputs\\phase_05\\campaign_v1_0905\\run_001\\suites\\s03\\physical_link_ownership.parquet",
+      "columns": [
+        "physical_arc_id",
+        "physical_arc_idx",
+        "ownership_role",
+        "original_owner_id",
+        "final_link_id",
+        "owner_count"
+      ],
+      "source_sha256": "2da0af32913b762a29eff39f8473599960a2835a4d403a28b616cd747b88f46c",
+      "rows": 661644
+    },
+    {
+      "name": "macro_sequences.parquet",
+      "source": "C:\\Users\\yiduo2\\PycharmProjects\\doe_solver_v3_phase1_outputs\\phase_05\\campaign_v1_0905\\run_001\\suites\\s03\\macro_sequences.parquet",
+      "columns": [
+        "corridor_id",
+        "sequence_position",
+        "primitive_id",
+        "internal_node_after"
+      ],
+      "source_sha256": "9c468265ee64c17eeb8da9e8848f7a61e73a4c0c0ffe392a0c6df6ec0554ebf0",
+      "rows": 31619
+    },
+    {
+      "name": "bacn_membership.parquet",
+      "source": "C:\\Users\\yiduo2\\PycharmProjects\\doe_solver_v3_phase1_outputs\\phase_03\\all_suite_acnhn\\phase3_all_suites_geo_gc_1000m_20260831_v1_run_001\\suites\\s03\\parquet\\bacn_membership.parquet",
+      "columns": [
+        "partC_rev1_node_uid",
+        "bacn_id"
+      ],
+      "source_sha256": "381793689858d0c83bc9a24454bed442bd9d505ee9afd3965d0f3db2c3b883ce",
+      "rows": 223063
+    },
+    {
+      "name": "bundle_membership.parquet",
+      "source": "C:\\Users\\yiduo2\\PycharmProjects\\doe_solver_v3_phase1_outputs\\phase_03\\all_suite_acnhn\\phase3_all_suites_geo_gc_1000m_20260831_v1_run_001\\suites\\s03\\parquet\\bundle_membership.parquet",
+      "columns": [
+        "directed_arc_id",
+        "bundle_id"
+      ],
+      "source_sha256": "e6bc437056e449a165b20fc331ddb01d1ff814d5663e9518bc0abfbd7cd8f053",
+      "rows": 109393
+    },
+    {
+      "name": "bundle_endpoints.parquet",
+      "source": "C:\\Users\\yiduo2\\PycharmProjects\\doe_solver_v3_phase1_outputs\\phase_03\\all_suite_acnhn\\phase3_all_suites_geo_gc_1000m_20260831_v1_run_001\\suites\\s03\\parquet\\bundle_summary.parquet",
+      "columns": [
+        "bundle_id",
+        "tail_bacn_id",
+        "head_bacn_id"
+      ],
+      "source_sha256": "8e626f76f78f07fb6b1fe4d49298c313f3082c6cbcb082b183f7ed3b30f30a1b",
+      "rows": 86533
+    },
+    {
+      "name": "structural_seed.parquet",
+      "source": "C:\\Users\\yiduo2\\PycharmProjects\\doe_solver_v3_phase1_outputs\\phase_03\\all_suite_acnhn\\phase3_all_suites_geo_gc_1000m_20260831_v1_run_001\\suites\\s03\\parquet\\structural_internal_charges.parquet",
+      "columns": [
+        "bacn_id",
+        "structural_charge_s"
+      ],
+      "source_sha256": "f4dd9d7999992e9ac0deb7d8f3d4b5f1bfe870814442879cde523041a5fe7d64",
+      "rows": 41775
+    }
+  ],
+  "members": [
+    {
+      "name": "backbone_plan.parquet",
+      "bytes": 5024041,
+      "sha256": "cf987f790898b1060fd04655ab4c3b4553c9e2ab4dabe98376db901433f43d45"
+    },
+    {
+      "name": "bacn_membership.parquet",
+      "bytes": 1423571,
+      "sha256": "27c24ab7dfec74ea94c059c3bac2c3e43518f0f8edd6fba9afe086480d8038c3"
+    },
+    {
+      "name": "bundle_endpoints.parquet",
+      "bytes": 3355724,
+      "sha256": "44a7a0f0c337f31accf62669d262bc8d929cfbd415efe7163f5b11089bba1f26"
+    },
+    {
+      "name": "bundle_membership.parquet",
+      "bytes": 1761640,
+      "sha256": "35f4e56e031f1220638e58a47805e3d31cd09d32abc5fecc4cb8ed83d5d047bc"
+    },
+    {
+      "name": "macro_sequences.parquet",
+      "bytes": 901731,
+      "sha256": "f37abb48743e4e33aade09717b8367eef28dc98a65fd1f9f1cc76fe1f6517a46"
+    },
+    {
+      "name": "physical_ownership.parquet",
+      "bytes": 8671922,
+      "sha256": "ecb9c9fa4633fa474974fd32bc573e8cd70508886cbd658efe2847ce1cfacd85"
+    },
+    {
+      "name": "represented_i95_ids.json",
+      "bytes": 46631,
+      "sha256": "bd384afca100a079749e59a9edb2d1a5cfccd2d69c5f1e5aae0c8ba3373f532a"
+    },
+    {
+      "name": "retained_nodes.parquet",
+      "bytes": 2122451,
+      "sha256": "3c8d00983671f6b66093549ef5e2c1b49763ffaea495db1ab2a1978bd30397aa"
+    },
+    {
+      "name": "structural_seed.parquet",
+      "bytes": 854952,
+      "sha256": "84248dcaf054908cc296c3b866a5c8b19b39ea2863133c7efcc1678c0491d9c5"
+    },
+    {
+      "name": "trace_mapping.npz",
+      "bytes": 7620955,
+      "sha256": "5bfd97f3eac2dcbe20463cb531742437769d49ea160771f85578079a3fbb0b4e"
+    }
+  ]
+}

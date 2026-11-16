@@ -1,0 +1,10 @@
+{
+  "phase_id": "REPRODUCIBILITY_SELF_CHECK",
+  "input_versions": {"fixtures": "synthetic nonempty raw GIS/OD, scalar capacity, directed topology and regional training fixtures"},
+  "resource_budget": {"wall_seconds_max": 600, "max_process_tree_rss_bytes": 4294967296, "min_available_ram_bytes": 3221225472, "max_generated_output_bytes": 1000000000},
+  "monitored_output_roots": ["runs"],
+  "tasks": [
+    {"step_id": "portable_tests", "script": "scripts/check_pytest.py", "args": ["--output", "runs/{run_id}/test_assets"], "expected_outputs": ["runs/{run_id}/test_assets/junit.xml"], "acceptance_tests": ["pytest exits zero with nonempty directed graph/OD fixtures and scalar/vector equivalence"], "wall_seconds_max": 180},
+    {"step_id": "regional_models", "script": "scripts/downstream/self_test.py", "args": ["--output", "runs/{run_id}/regional_assets"], "expected_outputs": ["runs/{run_id}/regional_assets/RESULT.json"], "acceptance_tests": ["certified regional labels, frozen roles, genuine ICNN1000/XGB32 fits, model roundtrip and fixed fallback pass"], "wall_seconds_max": 180}
+  ]
+}

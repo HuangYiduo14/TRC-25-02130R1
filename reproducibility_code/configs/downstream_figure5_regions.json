@@ -1,0 +1,119 @@
+{
+  "schema": "MANUSCRIPT_FIGURE5_COHORT_V1",
+  "source_plan_sha256": "c34ba07f8657a2616bdef099ea486f2411452ce973739b4ed66155b2b2ab3b08",
+  "seed": 20260928,
+  "regions": [
+    {
+      "region_key": "s03:000095",
+      "suite_id": "s03",
+      "region_index": 95,
+      "stratum": "large",
+      "pairs": 4855
+    },
+    {
+      "region_key": "s03:000730",
+      "suite_id": "s03",
+      "region_index": 730,
+      "stratum": "large",
+      "pairs": 3239
+    },
+    {
+      "region_key": "s03:001048",
+      "suite_id": "s03",
+      "region_index": 1048,
+      "stratum": "large",
+      "pairs": 3073
+    },
+    {
+      "region_key": "s03:001261",
+      "suite_id": "s03",
+      "region_index": 1261,
+      "stratum": "large",
+      "pairs": 1534
+    },
+    {
+      "region_key": "s03:000007",
+      "suite_id": "s03",
+      "region_index": 7,
+      "stratum": "small",
+      "pairs": 1
+    },
+    {
+      "region_key": "s03:000028",
+      "suite_id": "s03",
+      "region_index": 28,
+      "stratum": "small",
+      "pairs": 1
+    },
+    {
+      "region_key": "s03:000035",
+      "suite_id": "s03",
+      "region_index": 35,
+      "stratum": "small",
+      "pairs": 1
+    },
+    {
+      "region_key": "s03:000045",
+      "suite_id": "s03",
+      "region_index": 45,
+      "stratum": "small",
+      "pairs": 1
+    },
+    {
+      "region_key": "s03:001145",
+      "suite_id": "s03",
+      "region_index": 1145,
+      "stratum": "good",
+      "pairs": 2
+    },
+    {
+      "region_key": "s03:001734",
+      "suite_id": "s03",
+      "region_index": 1734,
+      "stratum": "good",
+      "pairs": 1
+    },
+    {
+      "region_key": "s03:001399",
+      "suite_id": "s03",
+      "region_index": 1399,
+      "stratum": "good",
+      "pairs": 1
+    },
+    {
+      "region_key": "s03:000171",
+      "suite_id": "s03",
+      "region_index": 171,
+      "stratum": "good",
+      "pairs": 2
+    },
+    {
+      "region_key": "s03:001387",
+      "suite_id": "s03",
+      "region_index": 1387,
+      "stratum": "bad",
+      "pairs": 52
+    },
+    {
+      "region_key": "s03:001447",
+      "suite_id": "s03",
+      "region_index": 1447,
+      "stratum": "bad",
+      "pairs": 22
+    },
+    {
+      "region_key": "s03:000096",
+      "suite_id": "s03",
+      "region_index": 96,
+      "stratum": "bad",
+      "pairs": 19
+    },
+    {
+      "region_key": "s03:000462",
+      "suite_id": "s03",
+      "region_index": 462,
+      "stratum": "bad",
+      "pairs": 44
+    }
+  ]
+}

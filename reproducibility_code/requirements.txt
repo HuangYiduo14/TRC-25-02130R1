@@ -1,0 +1,19 @@
+# Observed scientific environment; Python 3.12.3. No model weights included.
+numpy==1.26.4
+scipy==1.13.1
+pandas==2.2.3
+pyarrow==21.0.0
+geopandas==0.14.4
+pyogrio==0.10.0
+fiona==1.10.1
+shapely==2.0.6
+pyproj==3.6.1
+igraph==0.11.6
+leidenalg==0.10.2
+numba==0.62.1
+torch==2.4.1
+xgboost==2.1.3
+psutil==5.9.0
+scikit-learn==1.7.2
+openpyxl==3.1.5
+pytest==8.3.4

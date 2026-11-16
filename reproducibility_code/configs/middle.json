@@ -1,0 +1,52 @@
+{
+  "phase_id": "REPRODUCIBILITY",
+  "step_id": "MIDDLE_PIPELINE",
+  "run_id": "reader_v1",
+  "tasks": ["physical", "consolidate", "topology"],
+  "input_versions": {
+    "upstream_receipt": "data/processed/upstream/receipt.json",
+    "frozen_plan": "metadata/frozen_plan"
+  },
+  "output_root": "data/processed/middle",
+  "suite_ids": ["s02", "s03", "s04", "s05", "s06"],
+  "resolutions": {"s02": 0.3107232505953859, "s03": 1.0, "s04": 1.6, "s05": 4.0, "s06": 12.0},
+  "physical": {
+    "solver": "SAFEGUARDED_CFW",
+    "capacity_multiplier": 0.3,
+    "low_rg_sptt": 0.001,
+    "high_iterations": 200,
+    "workers": 4,
+    "max_seconds_per_solve": 21600
+  },
+  "partition": {
+    "random_seed": 42,
+    "objective_function": "modularity",
+    "beta": 0.01,
+    "n_iterations": -1,
+    "backbone_bridge_policy": "SINGLETON_DIRECTED_PHYSICAL_ARC_REGION"
+  },
+  "expected_outputs": [
+    "physical/low/state.npz", "physical/high/state.npz",
+    "consolidation/runtime_links.parquet", "consolidation/charges.parquet",
+    "topology/common_graph.npz", "topology/common_od.npz", "topology/partitions.npz",
+    "physical_STATUS.json", "consolidate_STATUS.json", "topology_STATUS.json"
+  ],
+  "acceptance_tests": [
+    "All frozen metadata hashes match",
+    "Fresh graph stable node/arc IDs match fixed topology plan",
+    "No empty graph, OD, topology or assignment outputs",
+    "LOW RG_SPTT measured on fully refreshed CURRENT state <= 1e-3",
+    "HIGH completes exactly 200 iterations without claiming the original 1e-4 target",
+    "CURRENT trace mixture matches physical mixture; AON kept separate",
+    "LOW E/V charge and one-sided power4 coefficients recomputed",
+    "Selected fitted macros pass certified 1 percent cost and potential bounds",
+    "Each physical cost has one owner and OD endpoints remain represented",
+    "Five suites preserve common P backbone, OD, capacity and represented closure"
+  ],
+  "resource_budget": {
+    "max_wall_seconds": 86400,
+    "rss_bytes": 25769803776,
+    "minimum_available_bytes": 3221225472,
+    "added_disk_bytes": 150000000000
+  }
+}

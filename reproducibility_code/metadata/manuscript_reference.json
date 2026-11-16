@@ -1,0 +1,32 @@
+{
+  "manuscript_title": "Regional network compression with input-convex neural cost surrogates for large-scale freight assignment",
+  "release": "MANUSCRIPT12H/run_20260929T224644Z/delivery/manuscript_review_v3",
+  "source_head": "76ec799bc16dc904f790448c8be04acee4880789",
+  "sha256": {
+    "main.pdf": "5f49a50e1b35b176847a229fb7bcbba6a54f9f63b779d1a6c8c6d5a9283140ef",
+    "supplement.pdf": "b410559ce2c06e815dbe81dad046cded2dfc5a8e91cf44b90647b4851f34e2a4",
+    "response_letter.pdf": "ceb641ac01c7e05ce76ae4007445e7cfe775ee6fbe94a4dd385cdd934c62e85e"
+  },
+  "historical_scale_for_orientation_only": {
+    "original_nodes": 346373,
+    "original_directed_arcs": 661644,
+    "positive_source_od_rows": 41637922,
+    "centroid_endpoints": 3225,
+    "source_demand_unit": "thousand tons/year, not vehicles",
+    "source_demand_total": 12667037.704538774,
+    "aggregate_od_rows": 10193770,
+    "P_nodes": 160293,
+    "P_arcs": 421789,
+    "common_backbone_arcs": 87582,
+    "s03_supported_regions": 1499,
+    "s03_supported_movements": 73947,
+    "s03_assignment_arcs": 167979
+  },
+  "resolutions": [0.310723, 1.0, 1.6, 4.0, 12.0],
+  "prepared_capacity_multiplier_applied_once": 0.3,
+  "region_model": "anchored two-layer Softplus scalar potential; nonnegative Power4 branch and neural amplitude; costs are gradient in physical units",
+  "comparison_families": ["FFTT", "Power4", "ICNN", "XGBoost"],
+  "figures_tables": "Independent manuscript figure/table-data release; omitted intentionally from this computational package",
+  "exact_historical_numeric_replay_required": false,
+  "historical_result_acceptance_is_not_reproduction_validation": true
+}

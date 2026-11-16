@@ -1,0 +1,389 @@
+{
+  "phase_id": "REPRODUCIBILITY",
+  "input_versions": {
+    "raw_profile": "configs/upstream.json; verified publicly available FAF5.7.1 2017 baseline +FAF5network +BTS county factors +NTAD",
+    "manuscript_method": "metadata/manuscript_reference.json",
+    "mapping_recipe": "metadata/frozen_plan/PLAN_MANIFEST.json"
+  },
+  "resource_budget": {
+    "wall_seconds_max": 86400,
+    "max_process_tree_rss_bytes": 25769803776,
+    "min_available_ram_bytes": 3221225472,
+    "max_generated_output_bytes": 150000000000
+  },
+  "monitored_output_roots": [
+    "data/processed",
+    "runs"
+  ],
+  "tasks": [
+    {
+      "step_id": "validate-inputs",
+      "script": "scripts/upstream/build_inputs.py",
+      "args": [
+        "--config",
+        "configs/upstream.json",
+        "--step",
+        "validate-inputs"
+      ],
+      "expected_outputs": [
+        "data/processed/upstream/validate-inputs_status.json"
+      ],
+      "depends_on": [],
+      "acceptance_tests": [
+        "Nonempty outputs and adapter domain checks pass"
+      ],
+      "wall_seconds_max": 21600
+    },
+    {
+      "step_id": "clean-network",
+      "script": "scripts/upstream/build_inputs.py",
+      "args": [
+        "--config",
+        "configs/upstream.json",
+        "--step",
+        "clean-network"
+      ],
+      "expected_outputs": [
+        "data/processed/upstream/clean-network_status.json"
+      ],
+      "depends_on": [
+        "validate-inputs"
+      ],
+      "acceptance_tests": [
+        "Nonempty outputs and adapter domain checks pass"
+      ],
+      "wall_seconds_max": 21600
+    },
+    {
+      "step_id": "disaggregate-demand",
+      "script": "scripts/upstream/build_inputs.py",
+      "args": [
+        "--config",
+        "configs/upstream.json",
+        "--step",
+        "disaggregate-demand"
+      ],
+      "expected_outputs": [
+        "data/processed/upstream/disaggregate-demand_status.json"
+      ],
+      "depends_on": [
+        "clean-network"
+      ],
+      "acceptance_tests": [
+        "Nonempty outputs and adapter domain checks pass"
+      ],
+      "wall_seconds_max": 21600
+    },
+    {
+      "step_id": "enrich-network",
+      "script": "scripts/upstream/build_inputs.py",
+      "args": [
+        "--config",
+        "configs/upstream.json",
+        "--step",
+        "enrich-network"
+      ],
+      "expected_outputs": [
+        "data/processed/upstream/enrich-network_status.json"
+      ],
+      "depends_on": [
+        "clean-network"
+      ],
+      "acceptance_tests": [
+        "Nonempty outputs and adapter domain checks pass"
+      ],
+      "wall_seconds_max": 21600
+    },
+    {
+      "step_id": "snapshots",
+      "script": "scripts/upstream/build_inputs.py",
+      "args": [
+        "--config",
+        "configs/upstream.json",
+        "--step",
+        "snapshots"
+      ],
+      "expected_outputs": [
+        "data/processed/upstream/snapshots_status.json",
+        "data/processed/upstream/receipt.json",
+        "data/processed/upstream/snapshots/*.npz"
+      ],
+      "depends_on": [
+        "disaggregate-demand",
+        "enrich-network"
+      ],
+      "acceptance_tests": [
+        "Nonempty outputs and adapter domain checks pass"
+      ],
+      "wall_seconds_max": 21600
+    },
+    {
+      "step_id": "physical",
+      "script": "scripts/middle/build_networks.py",
+      "args": [
+        "physical",
+        "--config",
+        "configs/middle.json"
+      ],
+      "expected_outputs": [
+        "data/processed/middle/physical/low/state.npz",
+        "data/processed/middle/physical/high/state.npz",
+        "data/processed/middle/physical_STATUS.json"
+      ],
+      "depends_on": [
+        "snapshots"
+      ],
+      "acceptance_tests": [
+        "Fresh LOW CURRENT RG<=1e-3, exactly200 HIGH updates, nonempty positive demand and separate CURRENT/AON"
+      ],
+      "wall_seconds_max": 43200
+    },
+    {
+      "step_id": "consolidate",
+      "script": "scripts/middle/build_networks.py",
+      "args": [
+        "consolidate",
+        "--config",
+        "configs/middle.json"
+      ],
+      "expected_outputs": [
+        "data/processed/middle/consolidation/runtime_links.parquet",
+        "data/processed/middle/consolidation/charges.parquet",
+        "data/processed/middle/consolidate_STATUS.json"
+      ],
+      "depends_on": [
+        "physical"
+      ],
+      "acceptance_tests": [
+        "Stable-ID metadata matches; fresh LOW-only costs pass native calibration certificates"
+      ],
+      "wall_seconds_max": 14400
+    },
+    {
+      "step_id": "topology",
+      "script": "scripts/middle/build_networks.py",
+      "args": [
+        "topology",
+        "--config",
+        "configs/middle.json"
+      ],
+      "expected_outputs": [
+        "data/processed/middle/topology/common_graph.npz",
+        "data/processed/middle/topology/common_od.npz",
+        "data/processed/middle/topology/partitions.npz",
+        "data/processed/middle/topology/RESULT.json"
+      ],
+      "depends_on": [
+        "consolidate"
+      ],
+      "acceptance_tests": [
+        "All5fixed-backbonepartitions, physical ownership and OD roles pass"
+      ],
+      "wall_seconds_max": 7200
+    },
+    {
+      "step_id": "references",
+      "script": "scripts/downstream/run_downstream.py",
+      "args": [
+        "references",
+        "--config",
+        "configs/downstream.json"
+      ],
+      "expected_outputs": [
+        "data/processed/middle/references/open/RESULT.json",
+        "data/processed/middle/references/i95/RESULT.json"
+      ],
+      "depends_on": [
+        "topology"
+      ],
+      "acceptance_tests": [
+        "Declared nonempty task coverage and frozen coordinate/role/model identities",
+        "Fresh certificates and unavailable/time-limited outcomes remain explicit"
+      ],
+      "wall_seconds_max": 36000
+    },
+    {
+      "step_id": "support",
+      "script": "scripts/downstream/run_downstream.py",
+      "args": [
+        "support",
+        "--config",
+        "configs/downstream.json"
+      ],
+      "expected_outputs": [
+        "data/processed/middle/SUPPORT_FREEZE.json"
+      ],
+      "depends_on": [
+        "references"
+      ],
+      "acceptance_tests": [
+        "Declared nonempty task coverage and frozen coordinate/role/model identities",
+        "Fresh certificates and unavailable/time-limited outcomes remain explicit"
+      ],
+      "wall_seconds_max": 36000
+    },
+    {
+      "step_id": "labels",
+      "script": "scripts/downstream/run_downstream.py",
+      "args": [
+        "labels",
+        "--config",
+        "configs/downstream.json"
+      ],
+      "expected_outputs": [
+        "data/processed/middle/training/LABEL_DISPOSITIONS.json"
+      ],
+      "depends_on": [
+        "support"
+      ],
+      "acceptance_tests": [
+        "Declared nonempty task coverage and frozen coordinate/role/model identities",
+        "Fresh certificates and unavailable/time-limited outcomes remain explicit"
+      ],
+      "wall_seconds_max": 36000
+    },
+    {
+      "step_id": "retry-labels",
+      "script": "scripts/downstream/run_downstream.py",
+      "args": [
+        "retry-labels",
+        "--config",
+        "configs/downstream.json"
+      ],
+      "expected_outputs": [
+        "data/processed/middle/reproduction_logs/retry-labels/RESULT.json"
+      ],
+      "depends_on": [
+        "labels"
+      ],
+      "acceptance_tests": [
+        "Declared nonempty task coverage and frozen coordinate/role/model identities",
+        "Fresh certificates and unavailable/time-limited outcomes remain explicit"
+      ],
+      "wall_seconds_max": 36000
+    },
+    {
+      "step_id": "train",
+      "script": "scripts/downstream/run_downstream.py",
+      "args": [
+        "train",
+        "--config",
+        "configs/downstream.json"
+      ],
+      "expected_outputs": [
+        "data/processed/middle/training/NORMALIZED_RECORDS.json"
+      ],
+      "depends_on": [
+        "retry-labels"
+      ],
+      "acceptance_tests": [
+        "Declared nonempty task coverage and frozen coordinate/role/model identities",
+        "Fresh certificates and unavailable/time-limited outcomes remain explicit"
+      ],
+      "wall_seconds_max": 36000
+    },
+    {
+      "step_id": "freeze",
+      "script": "scripts/downstream/run_downstream.py",
+      "args": [
+        "freeze",
+        "--config",
+        "configs/downstream.json"
+      ],
+      "expected_outputs": [
+        "data/processed/middle/portfolios/PORTFOLIOS.json",
+        "data/processed/middle/portfolios/PORTFOLIOS_ACCURACY_QUALIFIED.json"
+      ],
+      "depends_on": [
+        "train"
+      ],
+      "acceptance_tests": [
+        "Declared nonempty task coverage and frozen coordinate/role/model identities",
+        "Fresh certificates and unavailable/time-limited outcomes remain explicit"
+      ],
+      "wall_seconds_max": 36000
+    },
+    {
+      "step_id": "assign",
+      "script": "scripts/downstream/run_downstream.py",
+      "args": [
+        "assign",
+        "--config",
+        "configs/downstream.json"
+      ],
+      "expected_outputs": [
+        "data/processed/middle/assignments/RESULTS.json"
+      ],
+      "depends_on": [
+        "freeze"
+      ],
+      "acceptance_tests": [
+        "Declared nonempty task coverage and frozen coordinate/role/model identities",
+        "Fresh certificates and unavailable/time-limited outcomes remain explicit"
+      ],
+      "wall_seconds_max": 36000
+    },
+    {
+      "step_id": "evaluate",
+      "script": "scripts/downstream/run_downstream.py",
+      "args": [
+        "evaluate",
+        "--config",
+        "configs/downstream.json"
+      ],
+      "expected_outputs": [
+        "data/processed/middle/evaluation/REGIONAL_TEST.json"
+      ],
+      "depends_on": [
+        "freeze"
+      ],
+      "acceptance_tests": [
+        "Declared nonempty task coverage and frozen coordinate/role/model identities",
+        "Fresh certificates and unavailable/time-limited outcomes remain explicit"
+      ],
+      "wall_seconds_max": 36000
+    },
+    {
+      "step_id": "sample-fractions",
+      "script": "scripts/downstream/run_downstream.py",
+      "args": [
+        "sample-fractions",
+        "--config",
+        "configs/downstream.json"
+      ],
+      "expected_outputs": [
+        "data/processed/middle/experiments/sample_fractions/SELECTION_FREEZE.json",
+        "data/processed/middle/experiments/sample_fractions/TEST_EVALUATIONS.json"
+      ],
+      "depends_on": [
+        "evaluate"
+      ],
+      "acceptance_tests": [
+        "Declared nonempty task coverage and frozen coordinate/role/model identities",
+        "Fresh certificates and unavailable/time-limited outcomes remain explicit"
+      ],
+      "wall_seconds_max": 36000
+    },
+    {
+      "step_id": "enrichment",
+      "script": "scripts/downstream/run_downstream.py",
+      "args": [
+        "enrichment",
+        "--config",
+        "configs/downstream.json"
+      ],
+      "expected_outputs": [
+        "data/processed/middle/experiments/enrichment/SELECTION_FREEZE.json",
+        "data/processed/middle/experiments/enrichment/TEST_EVALUATIONS.json"
+      ],
+      "depends_on": [
+        "sample-fractions"
+      ],
+      "acceptance_tests": [
+        "Declared nonempty task coverage and frozen coordinate/role/model identities",
+        "Fresh certificates and unavailable/time-limited outcomes remain explicit"
+      ],
+      "wall_seconds_max": 36000
+    }
+  ]
+}

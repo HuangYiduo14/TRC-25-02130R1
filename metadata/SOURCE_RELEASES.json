@@ -1,0 +1,29 @@
+{
+  "combined_date": "2026-10-23",
+  "source_releases": [
+    {
+      "role": "computational_release",
+      "path": "C:/Users/yiduo2/Downloads/part_C_rev_1_code_data/script_data.zip",
+      "bytes": 33542014,
+      "sha256": "c11399929d329d32544007f686c05d3fcd64af23148a9b086079e82d929b1a59"
+    },
+    {
+      "role": "figure_release",
+      "path": "C:/Users/yiduo2/Downloads/part_C_rev_1_code_data/figure_reproducibility_package.zip",
+      "bytes": 49802228,
+      "sha256": "941e53729de47e030fc791c3a6f872d03cab34da30cf65c937e42f184566b08d"
+    },
+    {
+      "role": "figure_lineage",
+      "path": ".codex_work/manuscript_v6/run_20261013_full_package/delivery/v6_full_package.zip",
+      "bytes": 196587205,
+      "sha256": "a4ffbd8a7d9c24feae41f780fc46cc4f2e8b44acc6dd010a7403463730b10ddf"
+    }
+  ],
+  "latest_figure_reference": ".codex_work/manuscript_v8/revision_20261020/revised/figures",
+  "scientific_sources_modified": false,
+  "figure_sources_modified": false,
+  "computational_workflow_version": "September 30 2026 v2",
+  "figure_code_data_version": "October 14 2026",
+  "no_end_to_end_latest_manuscript_reproduction_claim": true
+}

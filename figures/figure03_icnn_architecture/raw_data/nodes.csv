@@ -1,0 +1,21 @@
+x,y,width,height,label,fill,fontsize
+1.5,5.8,2.35,1.15,"Scaled input
+$\xi=D_s\lambda^r$
+$\lambda^r\geq0$, $s_i>0$",#eaf1f8,16.6
+4.9,5.8,2.8,1.15,"First layer
+$H_1^r=\sigma(A_1\xi+b_1)$",#edf3e7,16.6
+8.75,5.8,3.4,1.5,"Second layer + input skip
+$H_2^r=\sigma(q_2)$
+$q_2=W_2H_1^r+A_2\xi+b_2$",#edf3e7,16.6
+11.95,5.8,1.85,1.15,"Scalar output
+$f_r=v^T H_2^r$",#edf3e7,16.6
+10.6,2.8,4.45,1.15,"Tangent-plane anchoring
+$R_r=f_r(\xi)-f_r(0)-\nabla f_r(0)^T\xi$",#fff2df,16.6
+5.85,2.8,4.3,1.5,"Regional scalar potential
+$\Phi_r=(\tau^{0,r})^T\lambda^r+P_{4,r}+\Gamma R_r$
+$P_{4,r}=\sum_i\eta_i s_i\xi_i^5/5$",#fff2df,16.6
+1.45,2.8,2.5,1.15,"Regional cost vector
+$T_r=\nabla_{\lambda^r}\Phi_r$",#eaf1f8,16.6
+6.55,0.7,12.55,1.15,"Potential $\Phi_r$: convex, nonnegative and nondecreasing.
+Costs $T_r$: nonnegative and nondecreasing in every input.
+Hessian: symmetric PSD, entrywise nonnegative; $\Gamma=0$ allowed.",#f4f4f4,16.6

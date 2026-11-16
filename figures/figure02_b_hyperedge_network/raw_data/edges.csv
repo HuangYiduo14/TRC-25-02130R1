@@ -1,0 +1,12 @@
+tail,head,role,curvature
+b0,p1,backbone,0.0
+p1,p2,backbone,0.0
+p2,b3,backbone,0.0
+p2,p3,backbone,0.0
+p3,b3,backbone,0.0
+p1,p2,regional_shortcut,0.2
+p1,p3,regional_shortcut,0.05
+p1,D,regional_shortcut,0.3
+O,p2,regional_shortcut,-0.2
+O,p3,regional_shortcut,-0.2
+O,D,regional_shortcut,0.0
