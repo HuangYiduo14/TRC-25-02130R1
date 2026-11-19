@@ -1,9 +1,0 @@
-data/raw/*
-data/processed/*
-runs/
-__pycache__/
-*.pyc
-.venv/
-.pytest_cache/
-*.nbc
-*.nbi
